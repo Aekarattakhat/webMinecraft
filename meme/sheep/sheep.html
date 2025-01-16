@@ -5,20 +5,50 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Frame Project</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
 </head>
 <body>
     <!-- A-Frame Scene -->
     <a-scene>
+        <!-- Add font to assets -->
+        <a-assets>
+            <a-asset-item id="thaiFont" src="./assets/fonts/NotoSerifThai-Regular.ttf"></a-asset-item>
+        </a-assets>
+
         <!-- Sky -->
         <a-sky color="#4585ed"></a-sky>
         
         <!-- Basic Shapes -->
-        <a-entity gltf-model="sheepInBoat.glb" position="1.20165 0 -4.19736"></a-entity>
+        <a-entity gltf-model="sheepInBoat.glb" position="0.5 0 -4.19736"></a-entity>
         <a-entity gltf-model="pistionBase.glb" position="1.20165 0 -4.19736"></a-entity>
-        <a-entity gltf-model="pistionShot.glb" position="1.20165 0 -4.19736"></a-entity>
-        
-        <!-- Camera -->
 
+        <a-entity gltf-model="pistionShot.glb" 
+                  position="1 0 -4.19736"
+                  animation="property: position; to: 1.5 0 -4.19736; dur: 2000; dir: alternate; loop: true">
+        </a-entity>
+
+        <!-- หัวข้อ -->
+        <a-troika-text value="เครื่องจักรกลแกะ" 
+                       font="./NotoSerifThai-Regular.ttf"
+                       position="0 4 -5"
+                       font-size="0.5"
+                       color="white"
+                       anchor="center"
+                       max-width="6">
+        </a-troika-text>
+
+        <!-- คำอธิบาย -->
+        <a-troika-text value="แกะเสียบตูด" 
+                       font="./NotoSerifThai-Regular.ttf"
+                       position="0 3 -5"
+                       font-size="0.3"
+                       color="white"
+                       anchor="center"
+                       max-width="6">
+        </a-troika-text>
+
+        <!-- Camera -->
+        <a-camera position="0 1.6 0"></a-camera>
     </a-scene>
 </body>
 </html>
