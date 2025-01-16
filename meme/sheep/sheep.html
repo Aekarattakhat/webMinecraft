@@ -13,10 +13,15 @@
         <a-sky color="#4585ed"></a-sky>
         
         <!-- Basic Shapes -->
-        <a-entity gltf-model="sheepInBoat.glb" position="1.20165 0 -4.19736"></a-entity>
+        <a-entity gltf-model="sheepInBoat.glb" position="0.5 0 -4.19736"></a-entity>
         <a-entity gltf-model="pistionBase.glb" position="1.20165 0 -4.19736"></a-entity>
-        <a-entity gltf-model="pistionShot.glb" position="1.20165 0 -4.19736"></a-entity>
-        
+
+        <a-entity gltf-model="pistionShot.glb" 
+        position="1 0 -4.19736"
+        animation="property: position; to: 1.5 0 -4.19736; dur: 2000; dir: alternate; loop: true">
+        </a-entity>
+
+
         <!-- Camera -->
 
     </a-scene>
