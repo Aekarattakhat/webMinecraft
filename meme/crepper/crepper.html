@@ -3,51 +3,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A-Frame Project</title>
+    <title>A-Frame Interactive Button with Sound</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
+    <style>
+        #startButton {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            padding: 10px 20px;
+            font-size: 18px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            z-index: 10;
+        }
+
+        #startButton:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
+    <!-- ปุ่ม -->
+    <button id="startButton">เริ่ม</button>
+
     <!-- A-Frame Scene -->
     <a-scene>
         <!-- Sky -->
         <a-sky color="#4585ed"></a-sky>
         
-        <!-- Basic Shapes -->
-        <a-entity gltf-model="house.glb" position="1.20165 0 -4.19736" rotation="0 90 0"></a-entity>
-        <a-entity gltf-model="houseExplode.glb" position="-12 0 -4.19736"rotation="0 180 0"></a-entity>
-        <a-entity gltf-model="creeper.glb" position="1.20165 0 -4.19736"rotation="0 90 0"
-            position="1 0 -4.19736"
-            animation="property: position; to: 1.20165 0.25 -4.19736; dur: 2000; dir: alternate; loop: true">
+        <!-- House -->
+        <a-entity id="house" gltf-model="house.glb" 
+                  position="1.20165 0 -4.19736" 
+                  rotation="0 90 0">
         </a-entity>
 
-        <!-- หัวข้อ -->
-        <a-troika-text value="Crepper" 
-                       position="-5 9 -4.19736"
-                       font-size="0.5"
-                       color="white"
-                       anchor="center"
-                       max-width="6">
-        </a-troika-text>
-         <!-- คำอธิบาย -->
-        <a-troika-text value="ยังไม่ระเบิด" 
-                       position="1.20165 8 -4.19736"
-                       font-size="0.5"
-                       color="white"
-                       anchor="center"
-                       max-width="6">
-        </a-troika-text>
+        <!-- Exploded House (Initially Hidden) -->
+        <a-entity id="houseExplode" gltf-model="houseExplode.glb" 
+                  position="1.20165 0 -4.19736" 
+                  rotation="0 90 0" 
+                  visible="false">
+        </a-entity>
 
-        <a-troika-text value="หลังโดนระเบิด" 
-                       position="-12 8 -4.19736"
-                       font-size="0.5"
-                       color="white"
-                       anchor="center"
-                       max-width="6">
-        </a-troika-text>
+        <!-- Creeper -->
+        <a-entity id="creeper" gltf-model="creeper.glb" 
+                  position="-2 0 -4.19736" 
+                  rotation="0 90 0"
+                  animation="property: position; to: 1.20165 0 -4.19736; dur: 5000; startEvents: creepMove">
+        </a-entity>
+
+        <!-- เสียง Creeper -->
+        <a-entity id="explosionSound" 
+                  sound="src: url('./Creeper_Sound.mp3'); autoplay: false; crossorigin: anonymous">
+        </a-entity>
 
         <!-- Camera -->
-        <a-camera position="-5 3 7" rotation="0 -90 0"></a-camera>
+        <a-camera position="-3 3 7" rotation="0 -90 0"></a-camera>
     </a-scene>
+
+    <script>
+        document.getElementById('startButton').addEventListener('click', () => {
+            const creeper = document.querySelector('#creeper');
+            const house = document.querySelector('#house');
+            const houseExplode = document.querySelector('#houseExplode');
+            const explosionSound = document.querySelector('#explosionSound');
+
+            // เปิดใช้งานเสียง (สำหรับเบราว์เซอร์ที่บล็อคเสียง)
+            explosionSound.components.sound.stopSound(); // หยุดเสียงก่อน (เผื่อเสียงค้าง)
+            explosionSound.components.sound.playSound(); // เรียกโหลดเสียง
+
+            // เริ่มการเดินของ Creeper
+            creeper.emit('creepMove');
+
+            // เมื่อ Creeper เดินถึงบ้าน
+            creeper.addEventListener('animationcomplete', () => {
+                // เล่นเสียง Creeper
+                explosionSound.components.sound.playSound();
+
+                // รอ 3 วินาที ก่อนซ่อนโมเดล
+                setTimeout(() => {
+                    // ซ่อนบ้านและ Creeper
+                    house.setAttribute('visible', 'false');
+                    creeper.setAttribute('visible', 'false');
+                    // แสดงบ้านที่ระเบิด
+                    houseExplode.setAttribute('visible', 'true');
+                }, 3000); // 3000 มิลลิวินาที = 3 วินาที
+            });
+        });
+    </script>
 </body>
 </html>
