@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,18 +10,12 @@
 <body>
     <!-- A-Frame Scene -->
     <a-scene>
-        <!-- Add font to assets -->
-        <a-assets>
-            <a-asset-item id="thaiFont" src="./assets/fonts/NotoSerifThai-Regular.ttf"></a-asset-item>
-        </a-assets>
-
         <!-- Sky -->
         <a-sky color="#4585ed"></a-sky>
         
         <!-- Basic Shapes -->
         <a-entity gltf-model="sheepInBoat.glb" position="0.5 0 -4.19736"></a-entity>
         <a-entity gltf-model="pistionBase.glb" position="1.20165 0 -4.19736"></a-entity>
-
         <a-entity gltf-model="pistionShot.glb" 
                   position="1 0 -4.19736"
                   animation="property: position; to: 1.5 0 -4.19736; dur: 2000; dir: alternate; loop: true">
@@ -29,7 +23,6 @@
 
         <!-- หัวข้อ -->
         <a-troika-text value="เครื่องจักรกลแกะ" 
-                       font="./NotoSerifThai-Regular.ttf"
                        position="0 4 -5"
                        font-size="0.5"
                        color="white"
@@ -39,7 +32,6 @@
 
         <!-- คำอธิบาย -->
         <a-troika-text value="แกะเสียบตูด" 
-                       font="./NotoSerifThai-Regular.ttf"
                        position="0 3 -5"
                        font-size="0.3"
                        color="white"
@@ -50,5 +42,17 @@
         <!-- Camera -->
         <a-camera position="0 1.6 0"></a-camera>
     </a-scene>
+
+    <!-- ปุ่มให้ผู้ใช้คลิกเพื่อเริ่มเสียง -->
+    <button id="startSound" style="position: fixed; top: 10px; left: 10px; padding: 10px;">เริ่มเสียง</button>
+
+    <script>
+        // เมื่อผู้ใช้คลิกปุ่ม เริ่มเสียง
+        document.getElementById('startSound').addEventListener('click', function() {
+            var audio = new Audio('SoundHelix-Song-1.mp3');
+            audio.loop = true;
+            audio.play();
+        });
+    </script>
 </body>
 </html>
