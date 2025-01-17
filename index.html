@@ -6,7 +6,6 @@
     <title>A-Frame Project</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
-    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
 
 </head>
 <body>
@@ -14,25 +13,22 @@
     <a-scene>
         <!-- Sky -->
         <a-sky src="res/sky.png" position="0 -20 0"></a-sky>
-        <a-entity gltf-model="res/grass.glb" position="0 -3 -4.41752"></a-entity>
+        <a-entity gltf-model="res/grass.glb" position="0 -2 -4.41752"></a-entity>
         
-        <a-entity 
-        id="player" 
-        position="0 1.6 0" 
-        camera 
+        <a-entity id="player" position="0 1.6 0" camera 
         look-controls 
         wasd-controls>
         <!-- Cursor -->
             <a-entity 
-            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" 
-            material="color: red; shader: flat" 
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.023" 
+            material="color: white; shader: flat" 
             position="0 0 -1"
             cursor="fuse: false">
             </a-entity>
         </a-entity>
 
-        <!-- Basic Shapes -->
         <a-entity gltf-model="res/welcome.glb" position="5.1 -2 -6.7" rotation="0 202 0"></a-entity>
+
         <a-box 
             position="4.5 2.5 -1" rotation="0 -80 0" 
             depth="0.2" height="0.6" width="1" 
@@ -41,7 +37,6 @@
         </a-box>
 
         <a-box
-            position="-0.47 1.9967 -15.23" rotation="0 -150.15 0" 
             position="-0.47 1.9967 -15.23" rotation="0 -150.15 0" 
             depth="0.2" height="0.6" width="1" 
             color="#bec0c2" 
