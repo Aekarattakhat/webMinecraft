@@ -5,17 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Frame Project</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
+    <script src="https://unpkg.com/aframe-event-set-component@5.0.0/dist/aframe-event-set-component.min.js"></script>
+
 </head>
 <body>
     <!-- A-Frame Scene -->
     <a-scene>
         <!-- Sky -->
-        <a-sky color="#4585ed"></a-sky>
+        <a-sky src="res/sky.png" position="0 -20 0"></a-sky>
+        <a-entity gltf-model="res/grass.glb" position="0 -3 -4.41752"></a-entity>
         
-        <!-- Basic Shapes -->
-        
-        <!-- Camera -->
+        <a-entity 
+        id="player" 
+        position="0 1.6 0" 
+        camera 
+        look-controls 
+        wasd-controls>
+        <!-- Cursor -->
+            <a-entity 
+            geometry="primitive: ring; radiusInner: 0.02; radiusOuter: 0.03" 
+            material="color: red; shader: flat" 
+            position="0 0 -1"
+            cursor="fuse: false">
+            </a-entity>
+        </a-entity>
 
+        <!-- Basic Shapes -->
+        <a-entity gltf-model="res/welcome.glb" position="5.1 -2 -6.7" rotation="0 202 0"></a-entity>
+        <a-box 
+            position="4.5 2.5 -1" rotation="0 -80 0" 
+            depth="0.2" height="0.6" width="1" 
+            color="#bec0c2" 
+            onclick="retomap('meme/heaven/heaven.html')">
+        </a-box>
+
+        <a-box
+            position="-0.47 1.9967 -15.23" rotation="0 -150.15 0" 
+            position="-0.47 1.9967 -15.23" rotation="0 -150.15 0" 
+            depth="0.2" height="0.6" width="1" 
+            color="#bec0c2" 
+            onclick="retomap('meme/sheep/sheep.html')">
+        </a-box>
+
+        <a-box 
+            position="-6.26337 1.14817 -12.44249" rotation="0 -70.91294000000002 0" 
+            depth="0.2" height="0.6" width="1" 
+            color="#bec0c2" 
+            onclick="retomap('meme/npc/npc.html')">
+        </a-box>
+
+        <a-box 
+            position="7.89827 1.997 -15.80635" rotation="0 -157.44 0" 
+            depth="0.2" height="0.6" width="1" 
+            color="#bec0c2" 
+            onclick="retomap('meme/crepper/crepper.html')">
+        </a-box>
+
+        <a-box 
+            position="10.73994 1.89746 -12.65197" rotation="0 112.14159149418525 0" 
+            depth="0.2" height="0.6" width="1" 
+            color="#bec0c2" 
+            onclick="retomap('meme/door/door.html')">
+        </a-box>
+
+        <a-box 
+            position="10.64339 1.897 -8.12647" rotation="0 28.92806611836013 0" 
+            depth="0.2" height="0.6" width="1" 
+            color="#bec0c2" 
+            onclick="retomap('meme/herobrine/herobrine.html')">
+        </a-box>
+        
     </a-scene>
+    <script>
+        
+        function retomap(map){
+            console.log(map)
+            window.location.href = map;
+        }
+    </script>
 </body>
 </html>
