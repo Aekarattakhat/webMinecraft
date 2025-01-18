@@ -11,14 +11,17 @@
     <!-- A-Frame Scene -->
     <a-scene>
         <!-- Sky -->
-        <a-sky color="#4585ed"></a-sky>
+        <a-sky src="/../res/sky.png" position="0 -20 0"></a-sky>
+        <a-entity gltf-model="/../res/grass.glb" position="0.5 -1 -4.19736"></a-entity>
+
         
         <!-- Basic Shapes -->
         <a-entity gltf-model="sheepInBoat.glb" position="0.5 0 -4.19736"></a-entity>
         <a-entity gltf-model="pistionBase.glb" position="1.20165 0 -4.19736"></a-entity>
-        <a-entity gltf-model="pistionShot.glb" 
-                  position="1 0 -4.19736"
-                  animation="property: position; to: 1.5 0 -4.19736; dur: 2000; dir: alternate; loop: true">
+        <a-entity gltf-model="pistionShot.glb" id="piston"
+                  position="1 0 -4.19736"  sound="src: url(out.wav); poolSize:5; loop:false;autoplay:false; on:animationbegin"
+                  animation="property: position; to: 1.5 0 -4.19736; dur: 200; dir: alternate;autoplay:false;loop:1;startEvents:ani" >
+                  
         </a-entity>
 
         <!-- หัวข้อ -->
@@ -47,12 +50,13 @@
     <button id="startSound" style="position: fixed; top: 10px; left: 10px; padding: 10px;">เริ่มเสียง</button>
 
     <script>
-        // เมื่อผู้ใช้คลิกปุ่ม เริ่มเสียง
-        document.getElementById('startSound').addEventListener('click', function() {
-            var audio = new Audio('SoundHelix-Song-1.mp3');
-            audio.loop = true;
-            audio.play();
-        });
+
+        var c=1
+        const piston = document.querySelector('#piston');
+        setInterval(()=>{
+            piston.emit('ani',null,false)
+            console.log(c++)
+        },600)
     </script>
 </body>
 </html>
