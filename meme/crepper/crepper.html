@@ -53,13 +53,16 @@
         <a-entity id="creeper" gltf-model="creeper.glb" 
                   position="-2 0 -4.19736" 
                   rotation="0 90 0"
-                  animation="property: position; to: 1.20165 0 -4.19736; dur: 5000; startEvents: creepMove">
+                  animation="property: position; to: 1.20165 0 -4.19736; dur: 3000; startEvents: creepMove">
         </a-entity>
 
         <!-- เสียง Creeper -->
-        <a-entity id="explosionSound" 
-                  sound="src: url('./Creeper_Sound.mp3'); autoplay: false; crossorigin: anonymous">
-        </a-entity>
+        <a-sound 
+            id="Creepersound" 
+            src="Creeper_Sound.mp3" 
+            autoplay="false" 
+            loop="false">
+        </a-sound>
 
         <!-- Camera -->
         <a-camera position="-3 3 7" rotation="0 -90 0"></a-camera>
@@ -70,29 +73,42 @@
             const creeper = document.querySelector('#creeper');
             const house = document.querySelector('#house');
             const houseExplode = document.querySelector('#houseExplode');
-            const explosionSound = document.querySelector('#explosionSound');
+            const Creepersound = document.querySelector('#Creepersound');
 
-            // เปิดใช้งานเสียง (สำหรับเบราว์เซอร์ที่บล็อคเสียง)
-            explosionSound.components.sound.stopSound(); // หยุดเสียงก่อน (เผื่อเสียงค้าง)
-            explosionSound.components.sound.playSound(); // เรียกโหลดเสียง
+            function startAnimationLoop() {
+                // ทำให้ Creeper และบ้านอยู่ในสถานะเริ่มต้น
+                creeper.setAttribute('position', '-2 0 -4.19736');
+                creeper.setAttribute('visible', 'true');
+                house.setAttribute('visible', 'true');
+                houseExplode.setAttribute('visible', 'false');
 
-            // เริ่มการเดินของ Creeper
-            creeper.emit('creepMove');
+                // เล่นเสียงตั้งแต่เริ่มต้น
+                Creepersound.components.sound.stopSound();
+                Creepersound.components.sound.playSound();
 
-            // เมื่อ Creeper เดินถึงบ้าน
-            creeper.addEventListener('animationcomplete', () => {
-                // เล่นเสียง Creeper
-                explosionSound.components.sound.playSound();
+                // เริ่มการเดินของ Creeper
+                creeper.emit('creepMove');
 
-                // รอ 3 วินาที ก่อนซ่อนโมเดล
-                setTimeout(() => {
-                    // ซ่อนบ้านและ Creeper
-                    house.setAttribute('visible', 'false');
+                // ฟังเหตุการณ์เมื่ออนิเมชันของ Creeper เสร็จสมบูรณ์
+                creeper.addEventListener('animationcomplete', () => {
+                    // ปรับเวลาเสียงไปที่วินาทีที่ 3
+                    const soundElement = Creepersound.components.sound.pool.children[0];
+                    if (soundElement) {
+                        soundElement.currentTime = 3; // ตั้งเวลาเริ่มเล่นเสียงที่วินาทีที่ 3
+                    }
+
+                    // ซ่อนบ้านเดิมและแสดงบ้านที่ระเบิดทันที
                     creeper.setAttribute('visible', 'false');
-                    // แสดงบ้านที่ระเบิด
+                    house.setAttribute('visible', 'false');
                     houseExplode.setAttribute('visible', 'true');
-                }, 3000); // 3000 มิลลิวินาที = 3 วินาที
-            });
+
+                    // รอ 5 วินาทีแล้วเริ่มลูปใหม่
+                    setTimeout(startAnimationLoop, 5000); // เปลี่ยนเป็น 5000 มิลลิวินาที
+                }, { once: true }); // ใช้ `{ once: true }` เพื่อป้องกันการเรียกซ้ำ
+            }
+
+            // เริ่มการลูป
+            startAnimationLoop();
         });
     </script>
 </body>
