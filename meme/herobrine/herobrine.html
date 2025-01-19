@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Frame Herobrine Project</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
     <script>
         AFRAME.registerComponent('toggle-visibility-and-sound', {
             schema: {
@@ -57,9 +58,32 @@
                  loop="true">
         </a-sound>
 
-        <!-- txet -->
-        <a-text value="Why doesn't Herobrine ever play hide and seek?
-        Because he's already everywhere and nowhere at the same time! You can go to him Press w" position="-2.9 1.57 -3.7" width="3" color= "#0000" ></a-text>
+        <!-- หัวข้อ -->
+        <a-troika-text value="Herobrine" 
+        position="-4 5 -8"
+        font-size="0.5"
+        color="white"
+        anchor="center"
+        max-width="6">
+       </a-troika-text>
+
+       <!-- คำอธิบาย 1 -->
+       <a-troika-text value="กฎ 5 ข้อ ของการเล่นมายคราฟตอนตี 3" 
+        position="-4 4 -8"
+        font-size="0.4"
+        color="white"
+        anchor="center"
+        max-width="7">
+       </a-troika-text>
+
+        <!-- คำอธิบาย 2 -->
+       <a-troika-text value="ตำนานแห่งน้องชายของ Notch ผู้สร้าง Minecraft ที่จะแก้แค้นพี่ชายตัวเอง ด้วยการหลอกหลอนผู้เล่น ทำให้สิ่งที่ไม่สามารถอธิบายได้ ให้เกิดขึ้นในเกมของผู้เล่นเหล่านั้น" 
+        position="-4 2 -8"
+        font-size="0.35"
+        color="white"
+        anchor="center"
+        max-width="7">
+       </a-troika-text>
 
         <!-- Camera with Distance Check -->
         <a-camera position="0 1.6 0" 
