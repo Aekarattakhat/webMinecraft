@@ -47,15 +47,16 @@
             scale="0.5 0.5 0.5">
         </a-entity>
 
-        <!-- Camera with attached sound -->
-        <a-camera>
-            <a-sound 
-                id="sound1" 
-                src="Hit.mp3" 
-                autoplay="true" 
-                loop="true">
-            </a-sound>
-        </a-camera>
+        <a-sound 
+            id="sound1" 
+            src="Hit.mp3" 
+            autoplay="false" 
+            position="2 0.3 -15.72945"
+            loop="true">
+        </a-sound>
+
+        <!-- Camera -->
+        <a-camera></a-camera>
 
     </a-scene>
 
@@ -64,17 +65,25 @@
         const redSteveOut = document.getElementById('red-steve-out');
         const steveIn = document.getElementById('steve-in');
         const steveOut = document.getElementById('steve-out');
-        
+        const sound = document.querySelector('#sound1');
+
+        // Wait for user interaction before enabling sound
+        document.body.addEventListener('click', () => {
+            console.log("User interaction detected, enabling sound.");
+            sound.components.sound.playSound();
+        }, { once: true });
+
+        // Toggle visibility and play sound
         setInterval(() => {
             redSteveOut.setAttribute('visible', 'false');
             steveOut.setAttribute('visible', 'true');
-    
-            // Play the sound when redSteveOut becomes visible
-            document.querySelector('a-sound').play();
-    
+            console.log('Playing sound and showing Steve Out.');
+            sound.components.sound.playSound();
+
             setTimeout(() => {
                 steveOut.setAttribute('visible', 'false');
                 redSteveOut.setAttribute('visible', 'true');
+                console.log('Hiding Steve Out and showing Red Steve Out.');
             }, 1000);
         }, 1500);
     </script>
