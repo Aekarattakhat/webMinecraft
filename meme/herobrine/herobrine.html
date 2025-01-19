@@ -5,32 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Frame Herobrine Project</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
     <script>
         AFRAME.registerComponent('toggle-visibility-and-sound', {
             schema: {
                 target: { type: 'selector' }, // Herobrine model
                 sound: { type: 'selector' },  // Sound entity
-                distance: { type: 'number', default: 3 } // Trigger distance
-            },
-            init: function () {
-                this.disappeared = false; // Track if Herobrine has disappeared
+                distance: { type: 'number', default: 15} // Trigger distance
             },
             tick: function () {
-                if (this.disappeared) return; // Stop processing if Herobrine has already disappeared
-    
                 const playerPos = this.el.object3D.position; // Camera position
                 const targetPos = this.data.target.object3D.position; // Herobrine position
                 
                 // Calculate distance
                 const distance = playerPos.distanceTo(targetPos);
     
-                // Trigger disappearance and sound when within range
+                // Hide Herobrine and play sound if within distance
                 if (distance <= this.data.distance) {
                     this.data.target.setAttribute('visible', 'false'); // Hide Herobrine
-                    if (this.data.sound && !this.disappeared) {
+                    if (this.data.sound && !this.data.sound.components.sound.isPlaying) {
                         this.data.sound.components.sound.playSound(); // Play sound
                     }
-                    this.disappeared = true; // Mark as disappeared
+                } else {
+                    // Show Herobrine if outside the distance
+                    this.data.target.setAttribute('visible', 'true'); // Show Herobrine
+                    if (this.data.sound && this.data.sound.components.sound.isPlaying) {
+                        this.data.sound.components.sound.stopSound(); // Stop sound
+                    }
                 }
             }
         });
@@ -47,7 +48,7 @@
         <!-- Herobrine -->
         <a-entity id="herobrine" 
                   gltf-model="herobrine.glb" 
-                  position="1.20165 0 -4.19736" 
+                  position="0.185 0 -16.7" 
                   visible="true">
         </a-entity>
 
@@ -55,17 +56,19 @@
         <a-sound id="herobrine-sound" 
         src="herobrine_sound.mp3" 
         autoplay="false" 
-        loop="false">
+        loop="true">
         </a-sound>
 
         <!-- txet -->
-        <a-text value="Why doesn't Herobrine ever play hide and seek?
-        Because he's already everywhere and nowhere at the same time! You can go to him Press w" position="-2.9 1.57 -3.7" width="3" color= "#0000" ></a-text>
+        <a-troika-text value="ตำนานแห่งน้องชายของ Notch ผู้สร้าง Minecraft ที่จะแก้แค้นพี่ชายตัวเอง
+ด้วยการหลอกหลอนผู้เล่นทำให้สิ่งที่ไม่สามารถอธิบายได้ 
+ให้เกิดขึ้นในเกมของผู้เล่นเหล่านั้น" 
+        position="-3 1.57 -3.7" width="3" color= "#0000" ></a-troika-text>
 
         <!-- Camera with Distance Check -->
-        <a-camera position="0 1.6 0" 
-                  toggle-visibility-and-sound="target: #herobrine; sound: #herobrine-sound; distance: 3">
-            <a-cursor></a-cursor>
+        <a-camera position="0 1.6 1" 
+          toggle-visibility-and-sound="target: #herobrine; sound: #herobrine-sound; distance : 15">
+             <a-cursor></a-cursor>
         </a-camera>
     </a-scene>
 </body>
