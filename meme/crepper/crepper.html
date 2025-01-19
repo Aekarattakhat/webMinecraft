@@ -6,6 +6,7 @@
     <title>A-Frame Interactive Button with Sound</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.5.2/dist/aframe-extras.min.js"></script>
     <style>
         #startButton {
             position: absolute;
@@ -28,13 +29,15 @@
     </style>
 </head>
 <body>
+
     <!-- ปุ่ม -->
     <button id="startButton">เริ่ม</button>
 
     <!-- A-Frame Scene -->
     <a-scene>
         <!-- Sky -->
-        <a-sky color="#4585ed"></a-sky>
+        <a-sky src="/../res/sky.png" position="0 -20 0"></a-sky>
+        <a-ocean width="200" depth="200" density="80" opacity="1" position="0 -2 0"></a-ocean>
         
         <!-- House -->
         <a-entity id="house" gltf-model="house.glb" 
@@ -55,6 +58,38 @@
                   rotation="0 90 0"
                   animation="property: position; to: 1.20165 0 -4.19736; dur: 3000; startEvents: creepMove">
         </a-entity>
+         <!-- หัวข้อ -->
+        <a-entity troika-text="value: Creeper;
+                color: white;
+                fontSize: 0.5;
+                outlineWidth: 0.05;
+                outlineColor: black;
+                anchor: center;
+                maxWidth: 6"
+                position="-5 8 -3">
+        </a-entity>
+ 
+        <!-- คำอธิบาย 1 -->
+        <a-entity troika-text="value:บ้านของฉานนน; 
+         font-size: 0.5;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:6"
+         position="1.20165 8 -3">
+        </a-entity>
+ 
+         <!-- คำอธิบาย 2 -->
+        <a-entity troika-text="value:มอนเตอร์ชนิดหนึ่งในเกม Minecraft ที่จะโจมตีด้วยการระเบิดตัวเอง ซึ่งส่วนใหญ่จะจบลงที่ผู้เล่นตาย บ้านเป็นรู หรือที่พื้นที่ที่กลายเป็นหลุมระเบิด; 
+         font-size:0.4;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:7"
+         position="-5 6 -3">
+        </a-troika-text>
 
         <!-- เสียง Creeper -->
         <a-sound 
@@ -65,7 +100,7 @@
         </a-sound>
 
         <!-- Camera -->
-        <a-camera position="-3 3 7" rotation="0 -90 0"></a-camera>
+        <a-camera position="0 3 10" rotation="0 -90 0"></a-camera>
     </a-scene>
 
     <script>
@@ -81,6 +116,7 @@
                 creeper.setAttribute('visible', 'true');
                 house.setAttribute('visible', 'true');
                 houseExplode.setAttribute('visible', 'false');
+
 
                 // เล่นเสียงตั้งแต่เริ่มต้น
                 Creepersound.components.sound.stopSound();

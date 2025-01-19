@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Frame Project</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe-gltf-part/dist/aframe-gltf-part.min.js"></script>
 </head>
 <body>
     <!-- A-Frame Scene -->
@@ -13,10 +14,69 @@
         <a-sky color="#4585ed"></a-sky>
         
         <!-- Basic Shapes -->
-        <a-entity gltf-model="underwater.glb" position="1.20165 0 -4.19736" rotation ="0 270 0"></a-entity>
-        <a-entity gltf-model="steve.glb" position="9.99056 2.75838 -15.72945" rotation="0.5 266.69 -0.25" scale="0.5 0.5 0.5"></a-entity>
-        <!-- Camera -->
+        <a-entity 
+            gltf-model="underwater.glb"
+            position="1.20165 0 -4.19736" 
+            rotation="0 270 0">
+        </a-entity>
+
+        <!-- Indoor Steve (Steve in) -->
+        <a-entity 
+            id="steve-in"
+            gltf-model="steve.glb" 
+            position="4.75 0 -15.72945" 
+            rotation="0.5 0 -0.25" 
+            scale="0.5 0.5 0.5">
+        </a-entity>
+   
+        <!-- Outdoor red steve (red steve out) -->
+        <a-entity 
+            id="red-steve-out"
+            gltf-model="red_steave.glb" 
+            position="2 0.3 -15.72945" 
+            rotation="90 0 -0.25" 
+            scale="0.5 0.5 0.5">
+        </a-entity>
+
+        <!-- Outdoor Steve (Steve out) that will hide when red steve out is visible -->
+        <a-entity 
+            id="steve-out"
+            gltf-model="steve.glb" 
+            position="2 0.3 -15.72945" 
+            rotation="90 0 -0.25" 
+            scale="0.5 0.5 0.5">
+        </a-entity>
+
+        <!-- Camera with attached sound -->
+        <a-camera>
+            <a-sound 
+                id="sound1" 
+                src="Hit.mp3" 
+                autoplay="true" 
+                loop="true">
+            </a-sound>
+        </a-camera>
 
     </a-scene>
+
+    <script>
+        // Get the entities by id
+        const redSteveOut = document.getElementById('red-steve-out');
+        const steveIn = document.getElementById('steve-in');
+        const steveOut = document.getElementById('steve-out');
+        
+        setInterval(() => {
+            redSteveOut.setAttribute('visible', 'false');
+            steveOut.setAttribute('visible', 'true');
+    
+            // Play the sound when redSteveOut becomes visible
+            document.querySelector('a-sound').play();
+    
+            setTimeout(() => {
+                steveOut.setAttribute('visible', 'false');
+                redSteveOut.setAttribute('visible', 'true');
+            }, 1000);
+        }, 1500);
+    </script>
 </body>
 </html>
