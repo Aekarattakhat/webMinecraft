@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A-Frame Project</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/aframe-troika-text/dist/aframe-troika-text.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/aframevr/aframe-gltf-part/dist/aframe-gltf-part.min.js"></script>
 </head>
 <body>
@@ -19,6 +20,39 @@
             position="1.20165 0 -4.19736" 
             rotation="0 270 0">
         </a-entity>
+        <!-- หัวข้อ -->
+        <a-entity troika-text="value:ประตูใต้น้ำ; 
+         font-size: 0.5;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:6"
+         position="-3 5 -7">
+        </a-entity>
+
+        <!-- คำอธิบาย 1 -->
+        <a-entity troika-text="value:ถังออกซิเจนแบบ Infinity; 
+         font-size: 0.4;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:6"
+         position="-3 4 -7">
+        </a-entity>
+
+        <!-- คำอธิบาย 2 -->
+        <a-entity troika-text="value:ประตู เมื่อนำมันไปวางใต้น้ำ จะเกิดพื้นที่ที่ไม่มีน้ำอยูระหว่างช่องว่างของประตู ทำให้ผู้เล่นใช้ช่องโหว่ของระบบนี้ ในการเติมอากาศให้กับตนเองเมื่ออยู่ใต้น้ำ; 
+         font-size: 0.35;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:6"
+         position="-3 2.5 -7">
+        </a-entity>
+
 
         <!-- Indoor Steve (Steve in) -->
         <a-entity 
