@@ -12,24 +12,25 @@
                 sound: { type: 'selector' },  // Sound entity
                 distance: { type: 'number', default: 3 } // Trigger distance
             },
+            init: function () {
+                this.disappeared = false; // Track if Herobrine has disappeared
+            },
             tick: function () {
+                if (this.disappeared) return; // Stop processing if Herobrine has already disappeared
+    
                 const playerPos = this.el.object3D.position; // Camera position
                 const targetPos = this.data.target.object3D.position; // Herobrine position
                 
                 // Calculate distance
                 const distance = playerPos.distanceTo(targetPos);
-
-                // Hide Herobrine and play sound if within distance
+    
+                // Trigger disappearance and sound when within range
                 if (distance <= this.data.distance) {
                     this.data.target.setAttribute('visible', 'false'); // Hide Herobrine
-                    if (this.data.sound && !this.data.sound.components.sound.isPlaying) {
+                    if (this.data.sound && !this.disappeared) {
                         this.data.sound.components.sound.playSound(); // Play sound
                     }
-                } else {
-                    this.data.target.setAttribute('visible', 'true'); // Show Herobrine
-                    if (this.data.sound && this.data.sound.components.sound.isPlaying) {
-                        this.data.sound.components.sound.stopSound(); // Stop sound
-                    }
+                    this.disappeared = true; // Mark as disappeared
                 }
             }
         });
@@ -52,9 +53,9 @@
 
         <!-- Sound -->
         <a-sound id="herobrine-sound" 
-                 src="herobrine_sound.mp3" 
-                 autoplay="false" 
-                 loop="true">
+        src="herobrine_sound.mp3" 
+        autoplay="false" 
+        loop="false">
         </a-sound>
 
         <!-- txet -->
