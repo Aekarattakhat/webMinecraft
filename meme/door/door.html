@@ -47,15 +47,16 @@
             scale="0.5 0.5 0.5">
         </a-entity>
 
-        <a-sound 
-            id="sound1" 
-            src="Hit.mp3" 
-            autoplay="true" 
-            loop="true"
-            position="2 0.3 -15.72945">
-        </a-sound>
+        <!-- Camera with attached sound -->
+        <a-camera>
+            <a-sound 
+                id="sound1" 
+                src="Hit.mp3" 
+                autoplay="true" 
+                loop="true">
+            </a-sound>
+        </a-camera>
 
-        <!-- Camera -->
     </a-scene>
 
     <script>
@@ -63,14 +64,13 @@
         const redSteveOut = document.getElementById('red-steve-out');
         const steveIn = document.getElementById('steve-in');
         const steveOut = document.getElementById('steve-out');
-        const sound1 = document.getElementById('sound1');
         
         setInterval(() => {
             redSteveOut.setAttribute('visible', 'false');
             steveOut.setAttribute('visible', 'true');
     
             // Play the sound when redSteveOut becomes visible
-            sound1.play();
+            document.querySelector('a-sound').play();
     
             setTimeout(() => {
                 steveOut.setAttribute('visible', 'false');
