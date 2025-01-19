@@ -14,7 +14,7 @@
     <a-scene>
         <!-- Sky -->
         <a-sky src="res/sky.png" position="0 -20 0"></a-sky>
-        <a-ocean width="200" depth="200" density="80" opacity="1" position="0 -0.4 0"></a-ocean>
+        <a-ocean width="200" depth="200" density="80" opacity="1" position="0 -0.7 0"></a-ocean>
         
         <a-entity id="player" position="0 1.6 0" camera 
         look-controls 
@@ -30,12 +30,33 @@
 
         <a-entity gltf-model="res/welcome.glb" position="5.1 -2 -6.7" rotation="0 202 0"></a-entity>
 
+        <a-entity troika-text="value:ยินดีต้อนรับ; 
+         font-size: 0.5;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:6"
+         position="0 1.6 -3">
+        </a-entity>
+
         <a-box 
             position="4.5 2.5 -1" rotation="0 -80 0" 
             depth="0.2" height="0.6" width="1" 
             color="#bec0c2" 
             onclick="retomap('meme/heaven/heaven.html')">
         </a-box>
+         <!-- หัวข้อ -->
+        <a-entity troika-text="value:ประตูสวรรค์; 
+        font-size: 0.5;
+        color:white;
+        outlineWidth: 0.05;
+        outlineColor: black;
+        anchor:center;
+        max-width:6"
+        position="4.5 3.5 -1"
+        rotation="0 -80 0">
+        </a-entity>
        
 
         <a-box
@@ -44,6 +65,17 @@
             color="#bec0c2" 
             onclick="retomap('meme/sheep/sheep.html')">
         </a-box>
+        <!-- หัวข้อ -->
+        <a-entity troika-text="value:เครื่องจักรแห่งแกะ; 
+         font-size: 0.5;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:6"
+         position="-0.47 2.4967 -15.23"
+         rotation="0 35 0">
+        </a-entity>
        
 
         <a-box 
@@ -52,6 +84,17 @@
             color="#bec0c2" 
             onclick="retomap('meme/npc/npc.html')">
         </a-box>
+        <!-- หัวข้อ -->
+        <a-entity troika-text="value:NPC(Villager); 
+         font-size: 0.5;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:6"
+         position="-6.26337 2 -12.44249"
+         rotation="0 90 0">
+        </a-entity>
          
 
         <a-box 
@@ -60,6 +103,17 @@
             color="#bec0c2" 
             onclick="retomap('meme/crepper/crepper.html')">
         </a-box>
+        <!-- หัวข้อ -->
+        <a-entity troika-text="value: Creeper;
+                color: white;
+                fontSize: 0.5;
+                outlineWidth: 0.05;
+                outlineColor: black;
+                anchor: center;
+                maxWidth: 6"
+                position="7.89827 2.8 -15.80635"
+                rotation="180 -157.44 180">
+        </a-entity>
        
         <a-box 
             position="10.73994 1.89746 -12.65197" rotation="0 112.14159149418525 0" 
@@ -67,14 +121,36 @@
             color="#bec0c2" 
             onclick="retomap('meme/door/door.html')">
         </a-box>
+        <!-- หัวข้อ -->
+        <a-entity troika-text="value:ประตูใต้น้ำ; 
+         font-size: 0.5;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:6"
+         position="10.73994 2.39746 -12.65197"
+         rotation="0 -73 0">
+        </a-entity>
         
 
         <a-box 
-            position="10.64339 1.897 -8.12647" rotation="0 28.92806611836013 0" 
+            position="10.64339 1.25 -8.12647" rotation="0 28.92806611836013 0" 
             depth="0.2" height="0.6" width="1" 
             color="#bec0c2" 
             onclick="retomap('meme/herobrine/herobrine.html')">
         </a-box>
+         <!-- หัวข้อ -->
+        <a-entity troika-text="value:Herobrine; 
+         font-size: 0.5;
+         color:white;
+         outlineWidth: 0.05;
+         outlineColor: black;
+         anchor:center;
+         max-width:6"
+         position="10.64339 2 -8.12647"
+         rotation="0 -138.92806611836013 0">
+        </a-entity>
         
     </a-scene>
     <script>
